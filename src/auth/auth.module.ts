@@ -4,7 +4,7 @@ import { AuthController } from './auth.controller';
 import { UsersModule } from '../users/users.module'; // Importation du module Users
 import { PassportModule } from '@nestjs/passport'; // Importation de PassportModule
 import { JwtModule } from '@nestjs/jwt'; // Importation de JwtModule
-import { JwtStrategy } from './jwt.strategy';  // Ajoute cette ligne
+import { JwtStrategy } from './jwt.strategy'; // Ajoute cette ligne
 
 @Module({
   imports: [

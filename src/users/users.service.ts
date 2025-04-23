@@ -10,17 +10,16 @@ export class UsersService {
     @InjectModel(Users.name)
     private userModel: Model<UserDocument>,
   ) {}
-  async findByUsername(username: string): Promise<Users | undefined> {
-    const user = await this.userModel.findOne({ username });
-    return user || undefined;
+async findByUsername(username: string) {
+    const user = await this.userModel.findOne({ username }).exec();
+    console.log('UsersService - Recherche username:', username, 'Résultat:', user);
+    return user;
   }
-  async create(
-    username: string,
-    password: string,
-    role: string = 'user',
-  ): Promise<Users> {
-    const hashed = await bcrypt.hash(password, 10);
-    const user = new this.userModel({ username, password: hashed, role });
-    return user.save();
+  async create(username: string, password: string, role: string) {
+    console.log('UsersService - Création utilisateur:', { username, password, role });
+    const newUser = new this.userModel({ username, password, role }); // Pas de hachage ici
+    const savedUser = await newUser.save();
+    console.log('UsersService - Utilisateur sauvegardé:', savedUser);
+    return savedUser;
   }
 }
